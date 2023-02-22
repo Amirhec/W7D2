@@ -1,0 +1,299 @@
+  [1m[35m (267.5ms)[0m  [1m[35mCREATE DATABASE "music_development" ENCODING = 'unicode'[0m
+  [1m[35m (115.9ms)[0m  [1m[35mCREATE DATABASE "music_test" ENCODING = 'unicode'[0m
+  [1m[35m (16.0ms)[0m  [1m[35mCREATE DATABASE "music_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE "music_test" ENCODING = 'unicode'[0m
+  [1m[35m (11.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3812030406321535125)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230221190309)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE INDEX "index_users_on_session_token" ON "users" ("session_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230221190309"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-02-21 19:06:44.835415"], ["updated_at", "2023-02-21 19:06:44.835415"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(3812030406321535125)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2023-02-21 17:08:10 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/amirlamrabat/.rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/amirlamrabat/.rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.0ms | Allocations: 526)
+Completed 200 OK in 11ms (Views: 6.2ms | ActiveRecord: 0.0ms | Allocations: 2808)
+
+
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "bobby"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (4.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "bobby"], ["password_digest", "[FILTERED]"], ["session_token", "[FILTERED]"], ["created_at", "2023-02-21 22:12:47.227647"], ["updated_at", "2023-02-21 22:12:47.227647"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/users" for ::1 at 2023-02-21 17:14:39 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users/" for ::1 at 2023-02-21 17:14:46 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/user" for ::1 at 2023-02-21 17:14:50 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/user"):
+  
+Started GET "/users" for ::1 at 2023-02-21 17:15:25 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for ::1 at 2023-02-21 17:16:01 -0500
+
+SyntaxError - syntax error, unexpected ':', expecting `end'
+  resources: :users
+           ^
+/Users/amirlamrabat/Downloads/practice-for-ch-rails-music-app-long-practice-main/music/config/routes.rb:9: syntax error, unexpected `end', expecting end-of-input:
+  config/routes.rb:8:in `'
+
+Started POST "/__better_errors/0ceff5f92d78c63d/variables" for ::1 at 2023-02-21 17:16:01 -0500
+Started GET "/users" for ::1 at 2023-02-21 17:16:08 -0500
+
+SyntaxError - syntax error, unexpected ':', expecting `end'
+  resources: :user
+           ^
+/Users/amirlamrabat/Downloads/practice-for-ch-rails-music-app-long-practice-main/music/config/routes.rb:9: syntax error, unexpected `end', expecting end-of-input:
+  config/routes.rb:8:in `'
+
+Started POST "/__better_errors/6a9f378c598bea94/variables" for ::1 at 2023-02-21 17:16:08 -0500
+Started GET "/users" for ::1 at 2023-02-21 17:16:36 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for ::1 at 2023-02-21 17:17:10 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for ::1 at 2023-02-21 17:17:11 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/user" for ::1 at 2023-02-21 17:18:39 -0500
+
+ActionController::RoutingError - uninitialized constant UserController
+      Object.const_get(camel_cased_word)
+            ^^^^^^^^^^
+Did you mean?  UsersController
+            raise MissingController.new(error.message, error.name)
+            ^^^^^:
+
+Started POST "/__better_errors/7e56dcc3a181d79d/variables" for ::1 at 2023-02-21 17:18:39 -0500
+Started GET "/users" for ::1 at 2023-02-21 17:18:43 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for ::1 at 2023-02-21 17:19:12 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.8ms | Allocations: 216)
+  Rendered users/index.html.erb within layouts/application (Duration: 32.4ms | Allocations: 6563)
+  Rendered layout layouts/application.html.erb (Duration: 58.4ms | Allocations: 12794)
+Completed 200 OK in 67ms (Views: 49.9ms | ActiveRecord: 12.7ms | Allocations: 14778)
+
+
+Started GET "/users/1" for ::1 at 2023-02-21 17:19:18 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 3.5ms | Allocations: 2419)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 2513)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 2840)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"edit", :controller=>"users", :id=>nil}, missing required keys: [:id]:
+  app/views/users/show.html.erb:3
+
+Started POST "/__better_errors/ca6a136cc9e70878/variables" for ::1 at 2023-02-21 17:19:18 -0500
+Started GET "/users" for ::1 at 2023-02-21 17:19:59 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 43)
+  Rendered users/index.html.erb within layouts/application (Duration: 6.3ms | Allocations: 3200)
+  Rendered layout layouts/application.html.erb (Duration: 8.1ms | Allocations: 4344)
+Completed 200 OK in 11ms (Views: 6.5ms | ActiveRecord: 2.4ms | Allocations: 5819)
+
+
+Started GET "/users/new" for ::1 at 2023-02-21 17:20:47 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.6ms | Allocations: 79)
+  Rendered users/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 380)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 1647)
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 2008)
+
+
+Started GET "/users" for ::1 at 2023-02-21 17:20:49 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered users/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1053)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 2002)
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.2ms | Allocations: 2223)
+
+
+Started GET "/users/new" for ::1 at 2023-02-21 17:20:50 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered users/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2.2ms | Allocations: 1380)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.0ms | Allocations: 1613)
+
+
+Started GET "/users" for ::1 at 2023-02-21 17:20:51 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered users/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1065)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 2014)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.2ms | Allocations: 2230)
+
+
+Started GET "/users/new" for ::1 at 2023-02-21 17:20:52 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered users/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1.9ms | Allocations: 1374)
+Completed 200 OK in 2ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 1611)
+
+
+Started GET "/users" for ::1 at 2023-02-21 17:20:53 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered users/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1081)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 2036)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.2ms | Allocations: 2253)
+
+
+Started GET "/users/1" for ::1 at 2023-02-21 17:21:05 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1513)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 1592)
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1798)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"edit", :controller=>"users", :id=>nil}, missing required keys: [:id]:
+  app/views/users/show.html.erb:3
+
+Started POST "/__better_errors/8c7e8f6f60dc355c/variables" for ::1 at 2023-02-21 17:21:05 -0500
+Started GET "/users/1" for ::1 at 2023-02-21 17:21:08 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1521)
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 1601)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1844)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"edit", :controller=>"users", :id=>nil}, missing required keys: [:id]:
+  app/views/users/show.html.erb:3
+
+Started POST "/__better_errors/cda419a10da2bba4/variables" for ::1 at 2023-02-21 17:21:08 -0500
+Started GET "/users/new" for ::1 at 2023-02-21 17:21:11 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.0ms | Allocations: 10)
+  Rendered users/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 141)
+  Rendered layout layouts/application.html.erb (Duration: 2.3ms | Allocations: 1581)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 1874)
+
+
+Started GET "/users/1" for ::1 at 2023-02-21 17:21:21 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1509)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 1588)
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1787)
+
+
+
+ActionController::UrlGenerationError - No route matches {:action=>"edit", :controller=>"users", :id=>nil}, missing required keys: [:id]:
+  app/views/users/show.html.erb:3
+
+Started POST "/__better_errors/3db299444dccc5ad/variables" for ::1 at 2023-02-21 17:21:21 -0500
+Started GET "/users/new" for ::1 at 2023-02-21 17:21:23 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.0ms | Allocations: 10)
+  Rendered users/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 141)
+  Rendered layout layouts/application.html.erb (Duration: 2.3ms | Allocations: 1587)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 1880)
+
+
+Started GET "/users/new" for ::1 at 2023-02-21 17:21:39 -0500
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered users/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2.1ms | Allocations: 1362)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 1596)
+
+
+Started GET "/users" for ::1 at 2023-02-21 17:51:32 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.6ms | Allocations: 25)
+  Rendered users/index.html.erb within layouts/application (Duration: 36.5ms | Allocations: 4109)
+  Rendered layout layouts/application.html.erb (Duration: 44.5ms | Allocations: 5058)
+Completed 200 OK in 54ms (Views: 50.1ms | ActiveRecord: 8.7ms | Allocations: 5277)
+
+
+Started GET "/users" for ::1 at 2023-02-21 20:22:22 -0500
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.3ms | Allocations: 43)
+  Rendered users/index.html.erb within layouts/application (Duration: 32.1ms | Allocations: 5824)
+  Rendered layout layouts/application.html.erb (Duration: 38.1ms | Allocations: 6968)
+Completed 200 OK in 48ms (Views: 41.0ms | ActiveRecord: 9.9ms | Allocations: 8433)
+
+
